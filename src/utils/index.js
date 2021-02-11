@@ -24,14 +24,14 @@ export function toDecimal(hexAsStr) {
   }
 }
 
-//input 2 decimals
-//output: sum of the 2 decimals
+// input 2 decimals
+// output: sum of the 2 decimals
 export function addDecimal(num1, num2, num3) {
   return num1 + num2 + num3;
 }
 
-//input: 1 decimal
-//output: 1 hexadecimal of the same value
+// input: 1 decimal
+// output: 1 hexadecimal of the same value
 export function toHex(number) {
   switch (true) {
     case number < 10:
@@ -53,8 +53,8 @@ export function toHex(number) {
   }
 }
 
-//input: a decimal
-//output: [carryOver: decimal, remainder: hex]
+// input: a decimal
+// output: [carryOver: decimal, remainder: hex]
 export function calcRemaining(num) {
   if (num > 15) {
     const carryOver = Math.floor(num / 16);
@@ -65,13 +65,13 @@ export function calcRemaining(num) {
 }
 
 /*
-go column by column, in reverse order
-convert both hex char to decimal
-add 2 decimals together
-calculate integer and remainder
-concat remainder to result
-update carryover with integer
-add each column with each other
+  go column by column, in reverse order
+  convert both hex char to decimal
+  add 2 decimals together
+  calculate integer and remainder
+  concat remainder to result
+  update carryover with integer
+  add each column with each other
 */
 
 export function addHex(hex1, hex2) {
@@ -98,8 +98,8 @@ export function addHex(hex1, hex2) {
   return result;
 }
 
-const answer = addHex("8a", "b78"); // expects C02
-console.log(answer === "c02" ? "correct" : `!! ${answer} was incorrect`);
+// const answer = addHex("8a", "b78"); // expects C02
+// console.log(answer === "c02" ? "correct" : `!! ${answer} was incorrect`);
 
-const answer2 = addHex("1f4a8d20", "3d1a334d"); // expect 5c64c06d
-console.log(answer2 === "5c64c06d" ? "correct" : `!! ${answer2} was incorrect`);
+// const answer2 = addHex("1f4a8d20", "3d1a334d"); // expect 5c64c06d
+// console.log(answer2 === "5c64c06d" ? "correct" : `!! ${answer2} was incorrect`);

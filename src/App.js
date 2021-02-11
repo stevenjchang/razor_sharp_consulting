@@ -1,23 +1,69 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { toDecimal, toHex } from "./utils";
+
+/*
+  - each component receives up to 2 hex values
+  - takes the last character of each hex
+  - converts it to decimal
+  - adds it
+  - converts that back to hex -> displays it
+  - passes down 2 hexes, and the carryOver
+
+  base case:
+  - if the component receives no hex values, render nothing
+  - if the component receives 1 hex, convert to decimal, sum with carryOver, display hex
+*/
+
+// example inputs:
+//  A, 8, 0 -> [1, 2]
+// 8, 7, 1 -> [0, 15]
+function calc(lastCharacter1, lastCharacter2, carryOver) {
+  const carryOverAsNumber = carryOver ? carryOver : 0;
+  const sum =
+    toDecimal(lastCharacter1) + toDecimal(lastCharacter2) + carryOverAsNumber;
+  return [Math.floor(sum / 16), sum % 16];
+}
+
+function DisplayHex({ remainder }) {
+  if (typeof remainder === "undefined") {
+    return null;
+  }
+  const displayedHexValue = toHex(remainder);
+  return <span>{displayedHexValue}</span>;
+}
+
+function SumHex({ hex1, hex2, carryOver }) {
+  if (!hex1 && !hex2) {
+    return null;
+  }
+  const lastCharacter1 = hex1.slice(hex1.length - 1);
+  const lastCharacter2 = hex2.slice(hex2.length - 1);
+  const [newCarryOver, remainder] = calc(
+    lastCharacter1,
+    lastCharacter2,
+    carryOver
+  );
+  const remainingCharacters1 = hex1.slice(0, -1);
+  const remainingCharacters2 = hex2.slice(0, -1);
+
+  return (
+    <>
+      <DisplayHex remainder={remainder} />
+      <SumHex
+        hex1={remainingCharacters1}
+        hex2={remainingCharacters2}
+        carryOver={newCarryOver}
+      />
+    </>
+  );
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="results flex row-reverse justify-center">
+        <SumHex hex1={"8a"} hex2={"b78"} />
+      </div>
     </div>
   );
 }
