@@ -14,9 +14,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "test:util-functions": "node --experimental-modules src/utils/index.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "type": "module",
   "eslintConfig": {
     "extends": [
       "react-app",
