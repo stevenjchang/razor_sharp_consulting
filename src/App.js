@@ -53,17 +53,24 @@ function App() {
   const [inputValues, setInputValues] = useState({
     hex1: "8a",
     hex2: "b78",
+    // hex1: '043a718774c572bd8a25adbeb1b',
+    // hex2: 'a31fe9656fc8d3a459e623dc820'
   });
   const [submitValues, setSubmitValues] = useState({});
 
   function handleChange(e) {
     setInputValues({
+      ...inputValues,
       [e.target.name]: e.target.value,
     });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
+    //TODO: validate inputValues exists, and are valid hex codes
+    //TODO: if invalid, do not set submitValues, and display error to user
+    //TODO: standardize inputValues to all lowercase
+
     setSubmitValues(inputValues);
   }
 
