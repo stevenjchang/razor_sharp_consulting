@@ -53,9 +53,19 @@ export function toHex(number) {
   }
 }
 
+// example inputs:
+//  A, 8, 0 -> [1, 2]
+// 8, 7, 1 -> [0, 15]
+export function calculateRemaining(lastCharacter1, lastCharacter2, carryOver) {
+  const carryOverAsNumber = carryOver ? carryOver : 0;
+  const sum =
+    toDecimal(lastCharacter1) + toDecimal(lastCharacter2) + carryOverAsNumber;
+  return [Math.floor(sum / 16), sum % 16];
+}
+
 // input: a decimal
 // output: [carryOver: decimal, remainder: hex]
-export function calcRemaining(num) {
+function calcRemaining(num) {
   if (num > 15) {
     const carryOver = Math.floor(num / 16);
     return [carryOver, toHex(num % 16)];
@@ -74,7 +84,7 @@ export function calcRemaining(num) {
   add each column with each other
 */
 
-export function addHex(hex1, hex2) {
+function addHex(hex1, hex2) {
   let p1 = hex1.length - 1;
   let p2 = hex2.length - 1;
   let carryOver = 0;

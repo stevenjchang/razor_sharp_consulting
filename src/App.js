@@ -1,5 +1,5 @@
 import "./App.css";
-import { toDecimal, toHex } from "./utils";
+import { toHex, calculateRemaining } from "./utils";
 
 /*
   - each component receives up to 2 hex values
@@ -13,16 +13,6 @@ import { toDecimal, toHex } from "./utils";
   - if the component receives no hex values, render nothing
   - if the component receives 1 hex, convert to decimal, sum with carryOver, display hex
 */
-
-// example inputs:
-//  A, 8, 0 -> [1, 2]
-// 8, 7, 1 -> [0, 15]
-function calc(lastCharacter1, lastCharacter2, carryOver) {
-  const carryOverAsNumber = carryOver ? carryOver : 0;
-  const sum =
-    toDecimal(lastCharacter1) + toDecimal(lastCharacter2) + carryOverAsNumber;
-  return [Math.floor(sum / 16), sum % 16];
-}
 
 function DisplayHex({ remainder }) {
   if (typeof remainder === "undefined") {
@@ -38,7 +28,7 @@ function SumHex({ hex1, hex2, carryOver }) {
   }
   const lastCharacter1 = hex1.slice(hex1.length - 1);
   const lastCharacter2 = hex2.slice(hex2.length - 1);
-  const [newCarryOver, remainder] = calc(
+  const [newCarryOver, remainder] = calculateRemaining(
     lastCharacter1,
     lastCharacter2,
     carryOver
