@@ -1,6 +1,7 @@
-import "./App.css";
+import { useState } from "react";
 import { toHex, calculateRemaining } from "./utils";
 
+import "./App.css";
 /*
   - each component receives up to 2 hex values
   - takes the last character of each hex
@@ -49,10 +50,27 @@ function SumHex({ hex1, hex2, carryOver }) {
 }
 
 function App() {
+  const [inputValue1, setInputValue1] = useState("8a");
+  const [inputValue2, setInputValue2] = useState("b78");
+
   return (
     <div className="App">
-      <div className="results flex row-reverse justify-center">
-        <SumHex hex1={"8a"} hex2={"b78"} />
+      <div className="my-24">
+        <input
+          type="text"
+          className=""
+          value={inputValue1}
+          onChange={(e) => setInputValue1(e.target.value)}
+        />
+        <input
+          type="text"
+          className=""
+          value={inputValue2}
+          onChange={(e) => setInputValue2(e.target.value)}
+        />
+      </div>
+      <div className="flex row-reverse justify-center">
+        <SumHex hex1={inputValue1} hex2={inputValue2} />
       </div>
     </div>
   );
