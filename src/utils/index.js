@@ -13,11 +13,12 @@ export function toDecimal(hexAsStr) {
   if (typeof hexAsStr === "undefined") {
     return 0;
   }
+  const hex = hexAsStr.toLowerCase();
   const number = Number(hexAsStr);
   if (typeof number === "number" && number < 16 && number >= 0) {
     return number;
-  } else if (legend[hexAsStr]) {
-    return legend[hexAsStr];
+  } else if (legend[hex]) {
+    return legend[hex];
   } else {
     // this is for any character that's defined but not valid hexadecimal character.
     throw new Error(hexAsStr + " not a valid hex value"); //I wouldn't actually throw error here in a real application. Just easier in an assignment like this with so much of the calculations happening in the background.

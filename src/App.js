@@ -67,10 +67,6 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    //TODO: validate inputValues exists, and are valid hex codes
-    //TODO: if invalid, do not set submitValues, and display error to user
-    //TODO: standardize inputValues to all lowercase
-
     setSubmitValues(inputValues);
   }
 
