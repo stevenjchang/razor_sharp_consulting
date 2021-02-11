@@ -50,27 +50,46 @@ function SumHex({ hex1, hex2, carryOver }) {
 }
 
 function App() {
-  const [inputValue1, setInputValue1] = useState("8a");
-  const [inputValue2, setInputValue2] = useState("b78");
+  const [inputValues, setInputValues] = useState({
+    hex1: "8a",
+    hex2: "b78",
+  });
+  const [submitValues, setSubmitValues] = useState({});
+
+  function handleChange(e) {
+    setInputValues({
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setSubmitValues(inputValues);
+  }
 
   return (
     <div className="App">
       <div className="my-24">
-        <input
-          type="text"
-          className=""
-          value={inputValue1}
-          onChange={(e) => setInputValue1(e.target.value)}
-        />
-        <input
-          type="text"
-          className=""
-          value={inputValue2}
-          onChange={(e) => setInputValue2(e.target.value)}
-        />
+        <form action="" className="" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="hex1"
+            className=""
+            value={inputValues.hex1}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="hex2"
+            className=""
+            value={inputValues.hex2}
+            onChange={handleChange}
+          />
+          <button className="">Submit</button>
+        </form>
       </div>
       <div className="flex row-reverse justify-center">
-        <SumHex hex1={inputValue1} hex2={inputValue2} />
+        <SumHex hex1={submitValues.hex1} hex2={submitValues.hex2} />
       </div>
     </div>
   );
